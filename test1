@@ -453,6 +453,7 @@ dataset_73662747_survey_df = pandas.read_gbq(
 
 dataset_73662747_survey_df.head(5)
 
+
 # Execute the queries
 person_data_df = pd.read_gbq(person_query, dialect="standard")
 drug_data_df = pd.read_gbq(drug_query, dialect="standard")
@@ -460,9 +461,10 @@ measurement_data_df = pd.read_gbq(measurement_query, dialect="standard")
 survey_data_df = pd.read_gbq(survey_query, dialect="standard")
 
 # Merge the dataframes based on person_id
-merged_data_df = person_data_df.merge(drug_data_df, on='person_id', how='left') \
-                                .merge(measurement_data_df, on='person_id', how='left') \
-                                .merge(survey_data_df, on='person_id', how='left')
+merged_data_df = person_data_df.merge(drug_data_df, on='person_id', how='left')
+merged_data_df = merged_data_df.merge(measurement_data_df, on='person_id', how='left')
+merged_data_df = merged_data_df.merge(survey_data_df, on='person_id', how='left')
 
-# Export the merged dataframe to a CSV file
+# Export the merged data to a CSV file
 merged_data_df.to_csv('merged_data.csv', index=False)
+
